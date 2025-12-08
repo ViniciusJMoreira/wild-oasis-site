@@ -2,6 +2,7 @@ import "@/app/_styles/globals.css";
 import { josefinSans } from "./fonts";
 
 import Header from "@/app/_components/Header";
+import { ReservationProvider } from "./_components/ReservationContext";
 
 export const metadata = {
   // title: "The Wild Oasis",
@@ -21,7 +22,10 @@ export default function RootLayout({ children }) {
       >
         <Header />
         <div className="grid flex-1 px-8 py-12">
-          <main className="w-full max-w-7xl mx-auto">{children}</main>
+          <main className="w-full max-w-7xl mx-auto">
+            {/* O provider é um componente cliente, e children são as páginas da aplicação. Porem il children ja foi definido como um componente servidor por padrão no Next.js, então precisamos envolver o children com o provider para que ele possa acessar o contexto de reserva. è a unica forma de passar um elemento servidor para um componente cliente. */}
+            <ReservationProvider>{children}</ReservationProvider>
+          </main>
         </div>
       </body>
     </html>
